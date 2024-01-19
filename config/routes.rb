@@ -1,65 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'orders/show'
-  end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/update'
-  end
-  namespace :admin do
-    get 'items/index'
-    get 'items/new'
-    get 'items/create'
-    get 'items/show'
-    get 'items/edit'
-    get 'items/update'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
-    get 'addresses/create'
-    get 'addresses/update'
-    get 'addresses/destroy'
-  end
-  namespace :public do
-    get 'order_details/index'
-    get 'order_details/show'
-  end
-  namespace :public do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/complete'
-    get 'orders/create'
-    get 'orders/index'
-    get 'orders/show'
-  end
-  namespace :public do
-    get 'cart_items/index'
-    get 'cart_items/update'
-    get 'cart_items/destroy'
-    get 'cart_items/destroy_all'
-    get 'cart_items/create'
-  end
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/update'
-    get 'customers/unsubscribe'
-    get 'customers/withdrawal'
-  end
-  namespace :public do
-    get 'items/index'
-    get 'items/show'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -68,5 +7,38 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
+  
+  scope module: :public do
+    root to: "homes#top"
+    get 'home/about' => 'homes#about', as: :about
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post 'confirm'
+        get 'complete'
+      end
+    end
+    resources :cart_items, only: [:index, :update, :destroy, :create] do 
+      collection do
+        delete 'destroy_all'
+      end
+    end
+    resources :customers, only: [:show, :edit, :update] do
+      collection do
+        get 'unsubscribe'
+        patch 'withdrawal'
+      end
+    end
+    resources :items, only: [:index, :show]
+    resources :addresses, only: [:index, :new, :edit, :create, :update, :destroy]
+    resources :ordet_details, only: [:index, :show]
+  end
+
+  namespace :admin do
+    root to: "homes#top"
+    resources :orders, only: [:show]
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :itemus, only: [:index, :new, :create, :show, :edit, :update]
+    resources :genres, only: [:index, :edit, :create, :update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  end
 end
