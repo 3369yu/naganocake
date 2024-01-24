@@ -7,7 +7,6 @@ class Public::SessionsController < Devise::SessionsController
     customers_path
   end
   
-  
   def after_sign_out_path_for(resource)
     root_path
   end
@@ -43,9 +42,11 @@ class Public::SessionsController < Devise::SessionsController
     # 【処理2】アカウントを取得できなかった場合、methodを終了
     return if customer.nil?
     # 【処理3】取得したアカウントのpasswordと入力されたpasswordが一致しない場合methodを終了
-    return unless customer.valid_password?(parms[:customer][:password])
+    return unless customer.valid_password?(params[:customer][:password])
     # 【処理4】activeではない会員に対する処理
-    return if customer.is_active == "false"
-      new_customer_registration_path
+    if customer.is_active == false
+      redirect_to new_customer_registration_path
+    end
   end
+  
 end

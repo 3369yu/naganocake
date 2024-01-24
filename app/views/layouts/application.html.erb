@@ -27,7 +27,7 @@
             <% if admin_signed_in? %>
               <% if request.fullpath.include? "/admin" %>
                 <li class="nav-item">
-                  <%= link_to "商品一覧", 'admin/itemus', class: 'nav-link text-dark' %>
+                  <%= link_to "商品一覧", admin_items_path, class: 'nav-link text-dark' %>
                 </li>
                 <li class="nav-item">
                   <%= link_to "会員一覧", '/admin/customers', class: 'nav-link text-dark' %>
@@ -36,10 +36,14 @@
                   <%= link_to "注文履歴一覧", '/admin', class: 'nav-link text-dark' %>
                 </li>
                 <li class="nav-item">
+                  <%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link text-dark' %>
+                </li>
+                <li class="nav-item">
                   <%= link_to "ログアウト",'/admins/sign_out', method: :delete, class: 'nav-link text-dark' %>
                 </li>
                 </li>
-                <% else %>
+              <% else %>
+              　<div>ようこそ<%= current_customer.last_name %>さん</div>
                 <li class="nav-item">
                   <%= link_to "マイページ", customers_path,  class: 'nav-link text-dark' %>
                 </li>
@@ -52,9 +56,9 @@
                 <li class="nav-item">
                   <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %>
                 </li>
-                <div><%= current_customer.last_name %>さん</div>
               <% end %>
             <% elsif customer_signed_in? %>
+              <div>ようこそ<%= current_customer.last_name %>さん</div>
               <li class="nav-item">
                   <%= link_to "マイページ", customers_path,  class: 'nav-link text-dark' %>
               </li>
@@ -67,7 +71,6 @@
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %>
               </li>
-              <div><%= current_customer.last_name %>さん</div>
             <% else %>
             <li class="nav-item">
               <%= link_to "About", about_path,  class: 'nav-link text-dark' %>

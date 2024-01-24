@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get 'home/about' => 'homes#about', as: :about
     get '/customers/information/edit'=> 'customers#edit'
-    resource :customers, only: [:show, :update] do
+    patch '/customers/update' => 'customers#update'
+    resource :customers, only: [:show] do
       collection do
         get 'unsubscribe'
         patch 'withdrawal'
@@ -39,7 +40,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:show]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
-    resources :genres, only: [:index, :edit, :create, :update]
+    resources :genres, only: [:index, :edit, :create, :update, :new]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   end
 end
