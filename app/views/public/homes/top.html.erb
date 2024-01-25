@@ -9,7 +9,7 @@
 <div class="item-wrap">
   <% @item.each do |item| %>
     <p><%= link_to 'item_path' do %>
-      <%= image_tag item.get_image(100,100) %>
+      <%= image_tag item.image, size: "200x200", alt: 'image' %>
     <% end %></p>
     <p><%= item.name %></p>
     <p>￥<%= number_with_delimiter(item.price) %></p>

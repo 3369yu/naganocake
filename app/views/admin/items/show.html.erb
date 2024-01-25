@@ -1,0 +1,24 @@
+<h2>商品詳細</h2>
+<%= image_tag @item.image, size: "200x200", alt: 'image' %>
+
+<h4>商品名　<%= @item.name %></h4>
+
+<h4>商品説明　<%= @item.introduction %></h4>
+
+<h4>ジャンル　<%= @item.genre.name %></h4>
+
+<h4>税込価格<br>
+    (税抜価格)
+    <span><%= (@item.price*1.1).round %>(<%= @item.price %>)円</span></h4>
+  
+<h4>販売ステータス
+    <% if @item.is_active %>
+      <span class="text-success"><strong>販売中</strong></span>
+    <% elsif %>
+      <span class="text-muted"><strong>販売停止中</strong></span></h4>
+      
+  <div class="action">
+    <%= link_to "編集する", edit_admin_items_path(@item.id), class: "btn btn-primary" %>
+  </div>
+
+<% end %>

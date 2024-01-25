@@ -6,20 +6,26 @@
   </div>
   <div class="field">
     <%= f.label :"商品名" %>
-    <%= f.text_field :name, autocomplete: "商品名" %>
+    <%= f.text_field :name, placeholder:"商品名" %>
   </div>
   <div class="field">
     <%= f.label :"商品説明" %>
-    <%= f.text_area :introduction, autocomplete: "ここに説明文を記述します" %>
+    <%= f.text_area :introduction, placeholder:"ここに説明文を記述します" %>
   </div>
   <div class="field">
-    <f.label :"ジャンル" %>
-    <f.collection_select :genre_id, Genre.all, :name, include_blank: "選択して下さい" %>
+    <%= f.label :"ジャンル" %>
+    <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), { include_blank: '--選択してください--' } %>
   </div>
   <div class="field">
     <%=f.label :"税抜価格" %>
-    <%=f.text_field :price, autocomplete: 1000 %>円
+    <%=f.text_field :price, placeholder:1000 %>円
+  </div>
+  <div class="fild">
+    <%=f.label :"販売ステータス" %>
+    <%= f.radio_button :is_active, "true" %>
+    <%= f.label :is_active, "販売中" %>
+    <%= f.radio_button :is_active, "false" %>
+    <%= f.label :payment_method_transfer, "販売停止中" %>
   </div>
   <%= f.submit "新規登録", class:"btn btn-success" %>
   <% end %>
-  
