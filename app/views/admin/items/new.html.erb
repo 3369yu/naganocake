@@ -21,11 +21,11 @@
     <%=f.text_field :price, placeholder:1000 %>円
   </div>
   <div class="fild">
-    <%=f.label :"販売ステータス" %>
+    <%= f.label :"販売ステータス" %>
     <%= f.radio_button :is_active, "true" %>
     <%= f.label :is_active, "販売中" %>
     <%= f.radio_button :is_active, "false" %>
-    <%= f.label :payment_method_transfer, "販売停止中" %>
+    <%= f.label :is_active, "販売停止中" %>
   </div>
   <%= f.submit "新規登録", class:"btn btn-success" %>
   <% end %>

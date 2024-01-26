@@ -1,4 +1,7 @@
 <h2>商品一覧</h2>
+<span><%= link_to new_admin_item_path do %>
+<i class="fa-regular fa-circle-plus"></i>
+<% end %></span>
 <table class="table">
   <tr>
     <th>商品ID</th>
@@ -22,9 +25,9 @@
           <p class="text-success"><strong>販売中</strong></p>
         <% elsif %>
           <p class="text-muted"><strong>販売停止中</strong></p>
+        <% end %>
       </td>
     </tr>
   <% end %>
 </table>
 <%= paginate @item %>
-<% end %>

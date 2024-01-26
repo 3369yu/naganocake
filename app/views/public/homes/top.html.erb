@@ -8,8 +8,8 @@
 <h3>新着商品</h3>
 <div class="item-wrap">
   <% @item.each do |item| %>
-    <p><%= link_to 'item_path' do %>
-      <%= image_tag item.image, size: "200x200", alt: 'image' %>
+    <p><%= link_to item_path(item.id) do %>
+      <%= image_tag item.get_image(200,200), alt: 'image' %>
     <% end %></p>
     <p><%= item.name %></p>
     <p>￥<%= number_with_delimiter(item.price) %></p>
