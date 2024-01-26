@@ -55,6 +55,11 @@
                 <li class="nav-item">
                   <%= link_to "ログイン", new_customer_session_path,  class: 'nav-link text-dark' %>
                 </li>
+                <div class="serch_form">
+                  <%= form_with url: items_path, method: :get do |f| %>
+                    <%= f.text_field :word, placeholder:"Search" %>
+                    <%= f.submit'検索'%>
+                <% end %>
               <% end %>
               <% elsif customer_signed_in? %>
                 <div>ようこそ<%= current_customer.last_name %>さん</div>
@@ -70,19 +75,29 @@
                 <li class="nav-item">
                   <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %>
                 </li>
+                <div class="serch_form">
+                  <%= form_with url: items_path, method: :get do |f| %>
+                    <%= f.text_field :name, placeholder:"Search" %>
+                    <%= f.submit'検索'%>
+                <% end %>
               <% else %>
-              <li class="nav-item">
-                <%= link_to "About", about_path,  class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "商品一覧", items_path,  class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "新規登録", new_customer_registration_path,  class: 'nav-link text-dark' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ログイン", new_customer_session_path,  class: 'nav-link text-dark' %>
-              </li>
+                <li class="nav-item">
+                  <%= link_to "About", about_path,  class: 'nav-link text-dark' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "商品一覧", items_path,  class: 'nav-link text-dark' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "新規登録", new_customer_registration_path,  class: 'nav-link text-dark' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログイン", new_customer_session_path,  class: 'nav-link text-dark' %>
+                </li>
+                <div class="serch_form">
+                  <%= form_with url: items_path, method: :get do |f| %>
+                    <%= f.text_field :name, placeholder:"Search" %>
+                    <%= f.submit'検索'%>
+                <% end %>
               <% end %>
             </ul>
           </div>

@@ -1,11 +1,21 @@
 class Public::ItemsController < ApplicationController
   def index
-    @item = Item.page(params[:page]).per(8)
+    if params[:name]
+      @name = params[:name]
+      @item = Item.where(['name LIKE ?', "%#{@name}%"])
+    elsif params[:genre_id]
+      @genre_id = params[:genre_id]
+      @item = Item.where(genre_id: @genre_id)
+    else
+      @item = Item.page(params[:page]).per(10)
+    end
   end
 
   def show
     @item = Item.find(params[:id])
     @cart_item = CartItem.new
+    @genres = Genre.all
+    @ganrename = Genre.name
   end
 
   def get_image
@@ -20,7 +30,7 @@ class Public::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :introduction, :price, :image, :genre_id, :is_active)
+    params.require(:item).permit(:name, :introduction, :price, :image, :genre_id, :is_active, :genre_name)
   end
 
 end

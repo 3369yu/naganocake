@@ -1,6 +1,11 @@
 class Admin::ItemsController < ApplicationController
   def index
-    @item = Item.page(params[:page]).per(10)
+    if params[:name]
+      @name = params[:name]
+      @item = Item.where(['name LIKE ?', "%#{@name}%"])
+    else
+      @item = Item.page(params[:page]).per(10)
+    end
   end
 
   def new
