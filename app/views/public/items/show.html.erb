@@ -25,8 +25,8 @@
 
 <% if @item.is_active == true %>
     <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-      <%= f.select :amount, *[1..10] %>
       <%= f.hidden_field :item_id, :value => @item.id %>
+      <%= f.select :amount, *[1..10] %>
       <%= f.submit "カートに入れる", class:"btn btn-success" %>
     <% end %>
 <% end %>
