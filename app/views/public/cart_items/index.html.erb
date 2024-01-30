@@ -1,4 +1,6 @@
 <h2>ショッピングカート</h2>
+<%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, "data-confirm" =>"本当に空にしますか？", class: "btn btn-danger" %>
+
 <table class="table">
   <tr>
     <th>商品名</th>
@@ -8,7 +10,7 @@
     <th></th>
   </tr>
   <% @sum = 0 %>
-  <%= @cart_items.each do |cart_item| %>
+  <% @cart_items.each do |cart_item| %>
   <tr>
     <td><%= image_tag cart_item.item.image, size: "50x50", alt: 'image' %>
         <%= cart_item.item.name %></td>
@@ -20,16 +22,16 @@
       <% end %>
     </td>
     <td><%= cart_item.subtotal %></td>
-    <td><%= link_to "削除する", cart_items_path, method: :delete, class: "btn btn-danger" %></td>
-  </tr>
+    <td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %></td>
   <% @sum += cart_item.subtotal %>
+  </tr>
+  <% end %>
 </table>
-<% end %>
-<%= link_to "買い物を続ける" , root_path , class: "btn btn-primary" %>
-<table class="table">
+<span><%= link_to "買い物を続ける" , root_path , class: "btn btn-primary" %></span>
+<span><table class="table">
   <tr>
     <td>合計金額</td>
     <td><%= @sum %></td>
   </tr>
-</table>
+</table></span>
   <%= link_to "注文情報入力に進む" , new_order_path , class: "btn btn-success" %>

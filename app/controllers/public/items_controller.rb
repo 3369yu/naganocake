@@ -1,4 +1,5 @@
 class Public::ItemsController < ApplicationController
+  
   def index
     if params[:name]
       @name = params[:name]
