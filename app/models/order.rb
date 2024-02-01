@@ -6,4 +6,8 @@ class Order < ApplicationRecord
   
   enum payment_method: { credit_card: 0, transfer: 1 }
   
+  def total_payment
+    cart_item.sum { |cart_item| cart_item.subtotal } + postage
+  end
+  
 end
