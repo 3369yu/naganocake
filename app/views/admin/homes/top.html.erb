@@ -1,1 +1,16 @@
-<h1>admin TOP</h1>
+<h2>注文履歴一覧</h2>
+
+<table class="table">
+  <tr>
+    <th>購入日時</th>
+    <th>購入者</th>
+    <th>注文個数</th>
+  </tr>
+<% @order.each do |order| %>
+  <tr>
+    <td><%= l order.created_at %></td>
+    <td><%= order.name %></td>
+    <td><%= order.order_detail.sum(:quantity) %></td>
+  </tr>
+  <% end %>
+</table>
