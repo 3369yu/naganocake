@@ -1,0 +1,55 @@
+<h2>注文履歴詳細</h2>
+<table class="table">
+  <tr>
+    <td><strong>購入者</strong></td>
+    <td><%= link_to admin_customer_path(@order.customer_id) do %>
+        <%= @order.customer.last_name %><%= @order.customer.first_name %></td>
+        <% end %>
+  </tr>
+  <tr>
+    <td><strong>注文日</strong></td>
+    <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+  </tr>
+  <tr>
+    <td><strong>配送先</strong></td>
+    <td>〒<%= @order.postal_code + " "+ @order.address + " " + @order.name %></td>
+  </tr>
+  <tr>
+    <td><strong>支払方法</strong></td>
+    <td><%= @order.payment_method_i18n %></td>
+  </tr>
+</table>
+
+<table class="table">
+  <tr>
+    <th>商品名</th>
+    <th>単価(税込)</th>
+    <th>数量</th>
+    <th>小計</th>
+  </tr>
+  <% @sum = 0 %>
+  <% @order_details.each do |order_detail| %>
+  <tr>
+    <td><%= order_detail.item.name %></td>
+    <td><%= order_detail.item.with_tax_price %></td>
+    <td><%= order_detail.quantity %></td>
+    <td><%= (order_detail.price*order_detail.quantity).floor %></td>
+  </tr>
+  <% @sum += (order_detail.price*order_detail.quantity).floor %>
+  <% end %>
+</table>
+  
+<table class="table">
+  <tr>
+    <td><strong>商品合計</strong></td>
+    <td><%= @sum %></td>
+  </tr>
+  <tr>
+    <td><strong>送料</strong></td>
+    <td><%= @postage %></td>
+  </tr>
+  <tr>
+    <td><strong>請求金額合計</strong></td>
+    <td><%= @postage + @sum %></td>
+  </tr>
+</table>

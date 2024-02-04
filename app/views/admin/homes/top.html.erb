@@ -12,7 +12,7 @@
         <%= l order.created_at, format: :long %>
         <% end %></td>
     <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
-    <td><%= order.order_detail.sum(:quantity) %></td>
+    <td><%= order.order_details.sum(:quantity) %></td>
   </tr>
   <% end %>
 </table>
