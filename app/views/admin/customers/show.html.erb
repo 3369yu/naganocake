@@ -39,5 +39,5 @@
 
 <div class="action">
     <span><%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-success mt-2" %>
-    <span><%= link_to "注文一覧を見る", admin_order_path(@customer.id), class:"btn btn-primary mt-2" %>
+    <span><%= link_to "注文一覧を見る", admin_root_path(customer_id: @customer.id), class:"btn btn-primary mt-2" %>
 </div>

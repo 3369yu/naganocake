@@ -1,3 +1,22 @@
+<% if params[:customer_id].present? %>
+ <h2><%= @customer.last_name + @customer.first_name %>さんの注文履歴一覧</h2>
+ <table class="table">
+  <tr>
+    <th>購入日時</th>
+    <th>注文個数</th>
+  </tr>
+  <% @order.each do |order| %>
+  <tr>
+    <td><%=link_to admin_order_path(order.id) do %>
+        <%= l order.created_at, format: :long %>
+        <% end %></td>
+    <td><%= order.order_details.sum(:quantity) %></td>
+  </tr>
+  <% end %>
+</table>
+<%= paginate @order %>
+
+<% else %>
 <h2>注文履歴一覧</h2>
 
 <table class="table">
@@ -16,3 +35,5 @@
   </tr>
   <% end %>
 </table>
+<%= paginate @order %>
+<% end %>
