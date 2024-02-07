@@ -13,100 +13,112 @@
 
 <body class="d-flex flex-column vh-100">
     <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-          <a class="navbar-brand p-3" href="/">
-            <span>ながのcake</span>
-          </a>
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand p-3" href="/">ながのcake</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <div class="collapse navbar-collapse d-flex flex-column" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <% if admin_signed_in? %>
               <% if request.fullpath.include? "/admin" %>
                 <li class="nav-item">
-                  <%= link_to "商品一覧", admin_items_path, class: 'nav-link text-dark' %>
+                  <%= link_to "商品一覧", admin_items_path, class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "会員一覧", '/admin/customers', class: 'nav-link text-dark' %>
+                  <%= link_to "会員一覧", '/admin/customers', class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "注文履歴一覧", '/admin', class: 'nav-link text-dark' %>
+                  <%= link_to "注文履歴一覧", '/admin', class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link text-dark' %>
+                  <%= link_to "ジャンル一覧", admin_genres_path, class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログアウト",'/admins/sign_out', method: :delete, class: 'nav-link text-dark' %>
+                  <%= link_to "ログアウト",'/admins/sign_out', method: :delete, class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
-                </li>
+                <form class="d-flex align-items-center mb-4" role="search">
+                  <%= form_with url: items_path, method: :get do |f| %>
+                    <%= f.text_field :name, placeholder:"Search" %>
+                    <%= f.submit'検索'%>
+                  <% end %>
+                </form>
               <% else %>
                 <li class="nav-item">
-                  <%= link_to "About", about_path,  class: 'nav-link text-dark' %>
+                  <%= link_to "About", about_path,  class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "商品一覧", items_path,  class: 'nav-link text-dark' %>
+                  <%= link_to "商品一覧", items_path,  class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "新規登録", new_customer_registration_path,  class: 'nav-link text-dark' %>
+                  <%= link_to "新規登録", new_customer_registration_path,  class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログイン", new_customer_session_path,  class: 'nav-link text-dark' %>
+                  <%= link_to "ログイン", new_customer_session_path,  class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
-                <div class="serch_form">
+                <form class="align-items-center mb-4" role="search">
                   <%= form_with url: items_path, method: :get do |f| %>
-                    <%= f.text_field :word, placeholder:"Search" %>
+                    <%= f.text_field :name, placeholder:"Search" %>
                     <%= f.submit'検索'%>
-                <% end %>
+                  <% end %>
+                </form>
               <% end %>
               <% elsif customer_signed_in? %>
                 <div>ようこそ<%= current_customer.last_name %>さん</div>
                 <li class="nav-item">
-                  <%= link_to "マイページ", customers_path,  class: 'nav-link text-dark' %>
+                  <%= link_to "マイページ", customers_path,  class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "商品一覧", items_path, class: 'nav-link text-dark' %>
+                  <%= link_to "商品一覧", items_path, class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "カート", cart_items_path, class: 'nav-link text-dark' %>
+                  <%= link_to "カート", cart_items_path, class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %>
+                  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
-                <div class="serch_form">
+                <form class="align-items-center mb-4" role="search">
                   <%= form_with url: items_path, method: :get do |f| %>
                     <%= f.text_field :name, placeholder:"Search" %>
                     <%= f.submit'検索'%>
-                <% end %>
+                  <% end %>
+                </form>
               <% else %>
                 <li class="nav-item">
-                  <%= link_to "About", about_path,  class: 'nav-link text-dark' %>
+                  <%= link_to "About", about_path,  class: "btn btn-outline-secondary mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "商品一覧", items_path,  class: 'nav-link text-dark' %>
+                  <%= link_to "商品一覧", items_path,  class: "btn btn-outline-secondary mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "新規登録", new_customer_registration_path,  class: 'nav-link text-dark' %>
+                  <%= link_to "新規登録", new_customer_registration_path,  class: "btn btn-outline-secondary mr-3" %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ログイン", new_customer_session_path,  class: 'nav-link text-dark' %>
+                  <%= link_to "ログイン", new_customer_session_path,  class: "btn btn-outline-secondary mr-3" %>
                 </li>
-                <div class="serch_form">
+                <form class="d-flex align-items-center mb-4" role="search">
                   <%= form_with url: items_path, method: :get do |f| %>
                     <%= f.text_field :name, placeholder:"Search" %>
                     <%= f.submit'検索'%>
-                <% end %>
+                  <% end %>
+                </form>
               <% end %>
             </ul>
           </div>
-        </div>
-      </nav>
+        </nav>
     </header>
     <main class="mb-auto">
     <%= yield %>
     </main>
-    <footer class="bg-dark text-white pt-5 pb-4"></footer>
+    <footer>
+    <div class="container mt-5 text-black pt-5 pb-4">
+      <div class="row">
+        <div class="mx-auto">
+          Copyright © Infratop Inc. All Rights Reserved.
+         </div>
+      </div>
+     </div>
+    </footer>
   </body>
 </html>

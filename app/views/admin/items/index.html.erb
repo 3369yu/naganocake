@@ -1,7 +1,10 @@
-<h2>商品一覧</h2>
-<span><%= link_to new_admin_item_path do %>
-<i class="fa-regular fa-circle-plus"></i>
-<% end %></span>
+<div class="container">
+  <div class="row">
+    <h3 class="col-lg-2 mt-3 mr-auto bg-light text-center">商品一覧</h3>
+    <div class="d-flex align-items-center">
+      <%= link_to "+", "/admin/items/new", class:"btn btn-light rounded-circle" %>
+    </div>
+    </div>
 <table class="table">
   <tr>
     <th>商品ID</th>
