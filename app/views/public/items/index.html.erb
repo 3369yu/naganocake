@@ -1,11 +1,27 @@
-<h2>商品一覧 (全<%= @item.count %>件)</h2>
-
-<div class="item-wrap">
-  <% @item.each do |item| %>
-    <p><%= link_to item_path(item.id) do %>
-      <%= image_tag item.image, size: "200x200", alt: 'image' %>
-    <% end %></p>
-    <p><%= item.name %></p>
-    <p>￥<%= number_with_delimiter(item.price) %></p>
-  <% end %>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-lg-2 mt-3">
+      <%= render 'search', genres: @genres %>
+    </div>
+    
+    <div class="col-lg-10">
+      <% if params[:genre_id].present? %>
+       <h4 class="my-3 text-left"><strong><%= @genre.name %>一覧</strong> (全<%= @item.count %>件)</h4>
+      <% else %>
+        <h4 class="my-3 text-left"><strng>商品一覧</strng> (全<%= @item.count %>件)</h4>
+      <% end %>
+      
+        <div class="d-flex flex-row flex-wrap mb-3">
+        <% @item.each do |item| %>
+          <div class="px-2">
+            <%= link_to item_path(item.id) do %>
+            <%= image_tag item.image, size: "200x150", alt: 'image' %>
+            <% end %>
+          <p class="mx-2"><%= item.name %></p>
+          <p class="mx-2">￥<%= number_with_delimiter(item.price) %></p>
+          </div>
+        <% end %>
+        </div>
+    </div>
+  </div>
 </div>

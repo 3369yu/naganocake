@@ -1,19 +1,36 @@
-<div class="top-text">
-  <p>ようこそ、ながのCAKEへ！</p>
-  <p>このサイトは、ケーキ販売のECサイトになります。</p>
-  <P>会員でない方も商品の閲覧はできますが、</P>
-  <p>購入には会員登録が必要になります。</p>
+<div class="container">
+  <div class="row my-3">
+    <div class="col-lg-2 mx-2">
+      <%= render 'public/items/search', genres: @genres %>
+    </div>
+    <div class="col-lg-8 mx-2">
+      <h3 class="border border-dark p-2">
+        ようこそ、ながのCAKEへ！<br>
+        このサイトは、ケーキ販売のECサイトになります。<br>
+        会員でない方も商品の閲覧はできますが、<br>
+        購入には会員登録が必要になります。<br>
+      </h3>
+  
+    <h3 class="my-3">新着商品</h3>
+      <div class="d-flex flex-row">
+        <% @item.each do |item| %>
+          <div class="px-2">
+            <%= link_to item_path(item.id) do %>
+            <%= image_tag item.get_image(200,200), alt: 'image' %>
+            <% end %>
+            <p class="mx-2"><%= item.name %></p>
+            <% if item.is_active == true %>
+              <p class="mx-2">￥<%= number_with_delimiter(item.price) %></p>
+            <% else %>
+              <p class="mx-2">販売停止中</p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+    <p class="text-right">
+      <%= link_to 'すべての商品を見る＞', items_path, class:"border-bottom" %>
+    </p>
 </div>
 
-<h3>新着商品</h3>
-<div class="item-wrap">
-  <% @item.each do |item| %>
-    <p><%= link_to item_path(item.id) do %>
-      <%= image_tag item.get_image(200,200), alt: 'image' %>
-    <% end %></p>
-    <p><%= item.name %></p>
-    <p>￥<%= number_with_delimiter(item.price) %></p>
-  <% end %>
-</div>
-
-<%= link_to 'すべての商品を見る', items_path %>

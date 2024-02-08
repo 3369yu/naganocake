@@ -4,11 +4,15 @@ class Public::ItemsController < ApplicationController
     if params[:name]
       @name = params[:name]
       @item = Item.where(['name LIKE ?', "%#{@name}%"])
+      @genres = Genre.all
     elsif params[:genre_id]
       @genre_id = params[:genre_id]
       @item = Item.where(genre_id: @genre_id)
+      @genres = Genre.all
+      @genre = Genre.find(params[:genre_id])
     else
-      @item = Item.page(params[:page]).per(10)
+      @item = Item.page(params[:page]).per(8)
+      @genres = Genre.all
     end
   end
 

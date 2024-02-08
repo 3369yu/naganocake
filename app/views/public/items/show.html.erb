@@ -1,32 +1,27 @@
-<table class="search">
-  <tr><th>ジャンル検索</th></tr>
-  <%= form_with url: items_path, method: :get do |f| %>
-    <% @genres.each do |genre| %>
-    <tr><td><%= link_to genre.name, items_path(genre_id: genre.id) %></td></tr>
-    <% end %>
-  <% end %>
-  </table>
-
-<div class="imagetag">
-  <%= image_tag @item.image, size: "200x200", alt: 'image' %>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-lg-2 mt-3">
+      <%= render 'search', genres: @genres %>
+    </div>
+    
+    <div class="col-lg-3 mt-3">
+      <%= image_tag @item.image, size: "250x200", alt: 'image' %>
+    </div>
+    
+    <div class="col-lg-6 mt-3">
+      <h4><strong><%= @item.name %></strong></h4><br>
+      <h5><%= @item.introduction %></h5><br>
+      <h5><strong>¥<%= (@item.price*1.1).round %></strong>(税込)</h5><br>
+      
+      <% if @item.is_active == true %>
+        <%= form_with model: @cart_item do |f| %>
+          <%= f.hidden_field :item_id, :value => @item.id %>
+          <%= f.select :amount, *[1..10], :prompt => "個数選択" %>
+          <%= f.submit "カートに入れる", class:"btn btn-success mx-5" %>
+        <% end %>
+      <% else %>
+        <p class="text-danger">販売停止中</p>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-<div class="data">
-  <%= @item.name %>
-</div>
-
-<div class="data">
-  <%= @item.introduction %>
-</div>
-
-<div class="data">
-  ¥<%= (@item.price*1.1).round %>(税込)
-</div>
-
-<% if @item.is_active == true %>
-    <%= form_with model: @cart_item do |f| %>
-      <%= f.hidden_field :item_id, :value => @item.id %>
-      <%= f.select :amount, *[1..10] %>
-      <%= f.submit "カートに入れる", class:"btn btn-success" %>
-    <% end %>
-<% end %>
