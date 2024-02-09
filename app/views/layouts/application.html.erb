@@ -15,14 +15,16 @@
 <body class="d-flex flex-column vh-100">
     <header class="shadow-sm">
         <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container">
           <a class="navbar-brand  align-middle p-3" href="/">ながのcake</a>
-          
+
           <div class="mt-3">
             <% if customer_signed_in? %>
               <p class="d-flex align-items-center align-items-center justify-content-center">ようこそ<%= current_customer.last_name %>さん！</p>
             <% end %>
           </div>
-          
+
+          <div class="col-lg-6 text-right">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -95,27 +97,23 @@
               <% end %>
             </ul>
           </div>
-        </nav>
-        <div class="search text-right mr-5">
+          <div class="text-right mt-2">
             <form class="right-block mb-3" role="search">
               <%= form_with url: items_path, method: :get do |f| %>
               <%= f.text_field :name, placeholder:"Search" %>
               <%= f.submit'検索'%>
               <% end %>
             </form>
+          </div>
         </div>
+        </div>
+        </nav>
     </header>
     <main class="mb-auto">
     <%= yield %>
     </main>
-    <footer>
-    <div class="container mt-5 text-black pt-5 pb-4">
-      <div class="row">
-        <div class="mx-auto">
-          Copyright © Infratop Inc. All Rights Reserved.
-         </div>
-      </div>
-     </div>
+    <footer class="text-black text-center border-top border-dark pt-5 pb-4">
+      Copyright © Infratop Inc. All Rights Reserved.
     </footer>
   </body>
 </html>

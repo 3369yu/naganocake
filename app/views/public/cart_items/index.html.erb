@@ -22,14 +22,14 @@
         <tr>
           <td><%= image_tag cart_item.item.image, size: "75x50", alt: 'image' %>
               <%= cart_item.item.name %></td>
-          <td><%= cart_item.item.with_tax_price %></td>
+          <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
           <td>
             <%= form_with model:cart_item, url:cart_item_path(cart_item.id), method: :patch do |f| %>
             <%= f.select :amount, *[1..10] %>
             <%= f.submit "変更" , class: "btn btn-success" %>
             <% end %>
           </td>
-          <td><%= cart_item.subtotal %></td>
+          <td><%= cart_item.subtotal.to_s(:delimited) %></td>
           <td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %></td>
         <% @sum += cart_item.subtotal %>
         </tr>
@@ -46,7 +46,7 @@
         <table class="table table-bordered">
           <tr>
             <td scope="col", class="bg-light">合計金額</td>
-            <td scope="col"><%= @sum %></td>
+            <td scope="col"><%= @sum.to_s(:delimited) %></td>
           </tr>
         </table>
       </div>
