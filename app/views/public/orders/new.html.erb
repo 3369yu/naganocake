@@ -34,7 +34,7 @@
         <%= f.label :select_addresse, "登録済みの住所から選択" %>
       </div>
       <div class="form-check mb-3 ml-4">
-        <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
+        <%= f.select :address_id, options_from_collection_for_select(current_customer.addresses.all, :id, :address_display) %>
       </div>
       
       <div class="form-check mt-2 ml-2">

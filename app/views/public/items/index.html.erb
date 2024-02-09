@@ -3,14 +3,14 @@
     <div class="col-lg-2 mt-3">
       <%= render 'search', genres: @genres %>
     </div>
-    
+
     <div class="col-lg-10">
       <% if params[:genre_id].present? %>
        <h4 class="my-3 text-left"><strong><%= @genre.name %>一覧</strong> (全<%= @item.count %>件)</h4>
       <% else %>
         <h4 class="my-3 text-left"><strng>商品一覧</strng> (全<%= @item.count %>件)</h4>
       <% end %>
-      
+
         <div class="d-flex flex-row flex-wrap mb-3">
         <% @item.each do |item| %>
           <div class="px-2">
@@ -24,9 +24,9 @@
         </div>
     </div>
   </div>
-  <div class="row mt-5">
-    <div class="col d-flex align-items-center text-align-center">
-      <%= paginate @item %>
+  <div class="row">
+    <div class="col-4 offset-6 mt-5">
+     <%= paginate @item %>
     </div>
   </div>
 </div>

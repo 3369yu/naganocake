@@ -24,7 +24,7 @@
             <% end %>
           </div>
 
-          <div class="col-lg-6 text-right">
+          <div class="col-lg-8 text-right">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,12 +48,6 @@
                 <li class="nav-item">
                   <%= link_to "ログアウト",'/admins/sign_out', method: :delete, class: "btn btn-outline-secondary text-black mr-3" %>
                 </li>
-                <form class="d-flex align-items-center mb-4" role="search">
-                  <%= form_with url: items_path, method: :get do |f| %>
-                    <%= f.text_field :name, placeholder:"Search" %>
-                    <%= f.submit'検索'%>
-                  <% end %>
-                </form>
               <% else %>
                 <li class="nav-item">
                   <%= link_to "About", about_path,  class: "btn btn-outline-secondary text-black mr-3" %>
